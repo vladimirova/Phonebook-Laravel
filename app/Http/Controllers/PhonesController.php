@@ -11,6 +11,10 @@ use Illuminate\Pagination\Paginator;
 
 class PhonesController extends Controller {
 
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
 
     /**
      * Store a newly created resource in storage.
