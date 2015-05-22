@@ -47,7 +47,7 @@ And to initial populate database use this:
 
     php artisan db:seed
 
-If you install on your localhost in folder laravel5startersite, you can type on web browser:
+If you install on your localhost in Phonebook-Laravel folder , you can type on web browser:
 
 	http://localhost/Phonebook-Laravel/public
 	
