@@ -23,7 +23,7 @@ class GroupsController extends Controller {
 	 */
 	public function index()
 	{
-        $groups = Group::where('user_id', Auth::id())->paginate(5);
+        $groups = Group::where('user_id', Auth::id())->paginate(2);
 
         foreach($groups as $group)
         {
