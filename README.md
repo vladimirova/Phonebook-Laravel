@@ -63,7 +63,7 @@ this will generate APP_KEY and save it in .evn file automatically. This command 
 <a name="step4"></a>
 ### Step 4: Start Page
 
-You can now login to admin part of Laravel Framework 5  Bootstrap 3 Starter Site:
+You can now login with:
 
     username: admin@admin.com
     password: admin
