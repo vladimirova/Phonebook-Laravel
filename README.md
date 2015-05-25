@@ -47,7 +47,7 @@ And to initial populate database use this:
 
     php artisan db:seed
 
-If you install on your localhost in folder laravel5startersite, you can type on web browser:
+If you install on your localhost in Phonebook-Laravel folder , you can type on web browser:
 
 	http://localhost/Phonebook-Laravel/public
 	
@@ -63,7 +63,7 @@ this will generate APP_KEY and save it in .evn file automatically. This command 
 <a name="step4"></a>
 ### Step 4: Start Page
 
-You can now login to admin part of Laravel Framework 5  Bootstrap 3 Starter Site:
+You can now login with:
 
     username: admin@admin.com
     password: admin
