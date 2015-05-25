@@ -23,7 +23,8 @@ class ContactRequest extends Request {
 	{
 		return [
             'fname' => 'required|min:3',
-            'lname' => 'required|min:3'
+            'lname' => 'required|min:3',
+            'phone_number' => 'min:1'
 		];
 	}
 

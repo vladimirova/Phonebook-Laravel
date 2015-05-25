@@ -19,4 +19,6 @@
     @include('phones.form', ['submitButtonText' => 'Add Phone'])
 
     {!! Form::close() !!}
+
+    @include('errors.list')
 @stop

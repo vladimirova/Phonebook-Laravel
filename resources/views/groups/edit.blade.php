@@ -7,4 +7,5 @@
     @include('groups.form', ['submitButtonText' => 'Edit Contact', 'check' => 'null'])
     {!! Form::close() !!}
 
+    @include('errors.list')
 @stop

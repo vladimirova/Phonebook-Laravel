@@ -7,5 +7,5 @@
     @include('contacts.form', ['submitButtonText' => 'Save', 'check' => 'true'])
     {!! Form::close() !!}
 
-    {{--{!! delete_form(['phones.destroy', $phone->id]) !!}--}}
+    @include('errors.list')
 @stop

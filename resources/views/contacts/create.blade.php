@@ -7,5 +7,5 @@
         @include('contacts.form', ['submitButtonText' => 'Add Contact'])
     {!! Form::close() !!}
 
-
+    @include('errors.list')
 @stop
