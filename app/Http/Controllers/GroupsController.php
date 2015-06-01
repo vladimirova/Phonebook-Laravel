@@ -29,7 +29,6 @@ class GroupsController extends Controller {
         {
             $group->mCount = $group->contacts()->count();
         }
-//        dd($groups);
         $tRow = 1;
         return view('groups.index', compact('groups', 'tRow'));
 	}
@@ -46,7 +45,7 @@ class GroupsController extends Controller {
                     ->select(DB::raw("CONCAT(fname,' ', lname) AS fullname, id"))
                     ->orderBy('fullname')
                     ->lists('fullname', 'id');
-//        dd($contacts);
+        
         return view('groups.create', compact('contacts'));
 	}
 
@@ -57,7 +56,6 @@ class GroupsController extends Controller {
 	 */
 	public function store(GroupRequest $request)
 	{
-//        dd($request->input('contacts'));
         $group = new Group($request->all());
         Auth::user()->groups()->save($group);
         $group->contacts()->attach($request->input('contacts'));

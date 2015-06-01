@@ -73,10 +73,6 @@ class ContactsController extends Controller {
      */
 	public function store(ContactRequest $request)
 	{
-//        $request['user_id'] = Auth::id();
-//        $article = Contact::create($request->all());
-//        $article->phones()->$request->save($request->all());
-
         $contact = new Contact($request->all());
         $phone = new Phone($request->all());
 
@@ -95,15 +91,11 @@ class ContactsController extends Controller {
 	 */
 	public function show($id)
 	{
-//        $contact = Contact::where('user_id', Auth::id())->where('id', $id)->get();
-
-        $contact = Contact::where('id', $id)->firstOrFail();
+        $contact = Contact::where('id', $id)->where('user_id', Auth::id())->firstOrFail();
 
         $contact->phones->toArray();
 
         $contact->toArray();
-
-//            dd(compact('contact'));
 
         return view('contacts.show', compact('contact'));
 
@@ -142,9 +134,7 @@ class ContactsController extends Controller {
                 $contact->phones()->where('id', $key)->update(['phone_number' => $phone_number]);
             }
             else $contact->phones()->where('id', $key)->delete();
-////            $phone->update(['phone_number' => $phone_number]);
-////            $phone->phone_number = $phone_number;
-////            $phone->save();
+
         }
 
         $contact->update($request->all());
