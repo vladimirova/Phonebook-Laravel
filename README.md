@@ -1,6 +1,6 @@
 =======
 ## Phonebook with Laravel 5.0 PHP Framework
-	http://phonebook-applaravel.rhcloud.com/contacts
+	http://phonebook-applaravel.rhcloud.com/home
 ##How to install:
 * [Step 1: Get the code](#step1)
 * [Step 2: Use Composer to install dependencies](#step2)
