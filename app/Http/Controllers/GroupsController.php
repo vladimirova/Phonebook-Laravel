@@ -45,7 +45,7 @@ class GroupsController extends Controller {
                     ->select(DB::raw("CONCAT(fname,' ', lname) AS fullname, id"))
                     ->orderBy('fullname')
                     ->lists('fullname', 'id');
-        
+
         return view('groups.create', compact('contacts'));
 	}
 
