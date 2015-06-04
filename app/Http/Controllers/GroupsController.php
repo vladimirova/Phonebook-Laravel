@@ -10,20 +10,28 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
+/**
+ * Class GroupsController
+ * @package App\Http\Controllers
+ */
 class GroupsController extends Controller {
 
+    /**
+     * Constructor
+     * set to middleware auth
+     */
     public function __construct()
     {
         $this->middleware('auth');
     }
 	/**
-	 * Display a listing of the resource.
+	 * Display a listing of the logged user groups.
 	 *
-	 * @return Response
+	 * @return groups.index blade
 	 */
 	public function index()
 	{
-        $groups = Group::where('user_id', Auth::id())->paginate(2);
+        $groups = Group::where('user_id', Auth::id())->paginate(5);
 
         foreach($groups as $group)
         {
@@ -34,9 +42,9 @@ class GroupsController extends Controller {
 	}
 
 	/**
-	 * Show the form for creating a new resource.
+	 * Show the form for creating a new group.
 	 *
-	 * @return Response
+	 * @return groups.create
 	 */
 	public function create()
 	{
@@ -50,7 +58,7 @@ class GroupsController extends Controller {
 	}
 
 	/**
-	 * Store a newly created resource in storage.
+	 * Store a newly created group in storage.
 	 *
 	 * @return Response
 	 */
@@ -64,21 +72,31 @@ class GroupsController extends Controller {
 	}
 
 	/**
-	 * Display the specified resource.
+	 * Display the specified group.
 	 *
 	 * @param  int  $id
 	 * @return Response
 	 */
 	public function show($id)
 	{
-		//
+        $group = Group::where('id', $id)
+            ->where('user_id', Auth::id())
+            ->firstOrFail();;
+
+        $contacts = $group
+            ->contacts()
+            ->select(DB::raw("CONCAT(fname,' ', lname) AS fullname, id"))
+            ->orderBy('fullname')
+            ->lists('fullname', 'id');
+
+        return view('groups.show', compact('group', 'contacts'));
 	}
 
 	/**
-	 * Show the form for editing the specified resource.
+	 * Show the form for editing the specified group.
 	 *
 	 * @param  int  $id
-	 * @return Response
+	 * @return groups.edit blade
 	 */
 	public function edit($id)
 	{
@@ -101,7 +119,7 @@ class GroupsController extends Controller {
 	}
 
 	/**
-	 * Update the specified resource in storage.
+	 * Update the specified group in storage.
 	 *
 	 * @param  int  $id
 	 * @return Response
@@ -119,7 +137,7 @@ class GroupsController extends Controller {
     }
 
 	/**
-	 * Remove the specified resource from storage.
+	 * Remove the specified group from storage.
 	 *
 	 * @param  int  $id
 	 * @return Response

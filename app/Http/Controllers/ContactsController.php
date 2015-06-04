@@ -11,16 +11,27 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Input;
 
+/**
+ * Class ContactsController
+ * @package App\Http\Controllers
+ */
+
 class ContactsController extends Controller {
 
+    /**
+     * Constructor
+     * set to middleware auth
+     *
+     */
     public function __construct()
     {
         $this->middleware('auth');
     }
+
 	/**
-	 * Display a listing of the resource.
+	 * Display a listing of the logged user contacts
 	 *
-	 * @return Response
+	 * @return contacts.index blade
 	 */
 	public function index()
 	{
@@ -57,9 +68,9 @@ class ContactsController extends Controller {
 	}
 
 	/**
-	 * Show the form for creating a new resource.
+	 * Show the form for creating a new contact.
 	 *
-	 * @return Response
+	 * @return contacts.index blade
 	 */
 	public function create()
 	{
@@ -67,7 +78,7 @@ class ContactsController extends Controller {
 	}
 
     /**
-     * Store a newly created resource in storage.
+     * Store a newly created contact in storage.
      *
      * @param ContactRequest $request
      * @return Response
@@ -85,10 +96,10 @@ class ContactsController extends Controller {
 	}
 
 	/**
-	 * Display the specified resource.
+	 * Display the specified by id contact.
 	 *
 	 * @param  int  $id
-	 * @return Response
+	 * @return contacts.show blade
 	 */
 	public function show($id)
 	{
@@ -103,10 +114,10 @@ class ContactsController extends Controller {
 	}
 
 	/**
-	 * Show the form for editing the specified resource.
+	 * Show the form for editing the specified contact.
 	 *
 	 * @param  int  $id
-	 * @return Response
+	 * @return contacts.edit blade
 	 */
 	public function edit($id)
 	{
@@ -119,7 +130,7 @@ class ContactsController extends Controller {
 	}
 
     /**
-     * Update the specified resource in storage.
+     * Update the specified contact in storage.
      *
      * @param  int $id
      * @param ContactRequest $request
@@ -131,6 +142,7 @@ class ContactsController extends Controller {
                     ->where('user_id', Auth::id())
                     ->firstOrFail();
         $input = $request->input('phone_number');
+
         foreach($input as $key => $phone_number)
         {
             if($phone_number !== '')
@@ -147,7 +159,7 @@ class ContactsController extends Controller {
 	}
 
 	/**
-	 * Remove the specified resource from storage.
+	 * Remove the specified contact from storage.
 	 *
 	 * @param  int  $id
 	 * @return Response

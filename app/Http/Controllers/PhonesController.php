@@ -9,15 +9,23 @@ use App\Http\Requests\PhoneRequest;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Pagination\Paginator;
 
+/**
+ * Class PhonesController
+ * @package App\Http\Controllers
+ */
 class PhonesController extends Controller {
 
+    /**
+     * Constructor
+     * set to middleware auth
+     */
     public function __construct()
     {
         $this->middleware('auth');
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Store a newly created a phone in storage.
      *
      * @param PhoneRequest $request
      * @return Response
@@ -29,7 +37,7 @@ class PhonesController extends Controller {
 	}
 
 	/**
-	 * Update the specified resource in storage.
+	 * Update the specified phone in storage.
 	 *
 	 * @param  int  $id
 	 * @return Response
@@ -50,6 +58,7 @@ class PhonesController extends Controller {
 	 */
 	public function destroy($id)
 	{
+
 		$phone = Phone::findOrFail($id);
         $phone->delete();
 
