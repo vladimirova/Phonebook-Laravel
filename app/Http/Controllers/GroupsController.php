@@ -82,7 +82,9 @@ class GroupsController extends Controller {
 	 */
 	public function edit($id)
 	{
-		$group = Group::findOrFail($id);
+		$group = Group::where('id', $id)
+                    ->where('user_id', Auth::id())
+                    ->firstOrFail();;
 
         $contacts = $group
                     ->contacts()
@@ -124,7 +126,9 @@ class GroupsController extends Controller {
 	 */
 	public function destroy($id)
 	{
-        $group = Group::findOrFail($id);
+        $group = Group::where('id', $id)
+            ->where('user_id', Auth::id())
+            ->firstOrFail();
         $group->delete();
 
         return redirect('groups');

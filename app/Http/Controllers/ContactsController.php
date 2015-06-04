@@ -36,6 +36,7 @@ class ContactsController extends Controller {
                 $contacts = Contact::whereHas('phones', function($q) use ($search) {
                     $q->where('phone_number', 'LIKE', "%$search%");
                     })
+                    ->where('user_id', Auth::id())
                     ->orderBy('fname')
                     ->paginate(5);
             }
@@ -109,10 +110,11 @@ class ContactsController extends Controller {
 	 */
 	public function edit($id)
 	{
-        $contact = Contact::findOrFail($id);
+        $contact = Contact::where('id', $id)
+                    ->where('user_id', Auth::id())
+                    ->firstOrFail();
         $contact->phones()->get();
-//        $contact->toArray();
-//    dd($contact->phones[0]->id);
+
         return view('contacts.edit', compact('contact'));
 	}
 
@@ -125,7 +127,9 @@ class ContactsController extends Controller {
      */
 	public function update($id, ContactRequest $request)
 	{
-        $contact = Contact::findOrFail($id);
+        $contact = Contact::where('id', $id)
+                    ->where('user_id', Auth::id())
+                    ->firstOrFail();
         $input = $request->input('phone_number');
         foreach($input as $key => $phone_number)
         {
@@ -150,7 +154,9 @@ class ContactsController extends Controller {
 	 */
 	public function destroy($id)
 	{
-        $contact = Contact::findOrFail($id);
+        $contact = Contact::where('id', $id)
+                    ->where('user_id', Auth::id())
+                    ->firstOrFail();
         $contact->delete();
 
         return redirect('contacts');
